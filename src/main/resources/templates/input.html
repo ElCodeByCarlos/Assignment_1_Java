@@ -2,15 +2,29 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-
-    <title>Input</title>
+    <title>Assignment 1 / Carlos Tello Dominguez</title>
 </head>
 <body>
 <header>
-    <h1>Input</h1>
+    <h1>Assignment 1 / Carlos Tello Dominguez</h1>
 </header>
 <main>
+    <h1>Enter a text of at least 10 characters.</h1>
+    <form>
+        <p>
+            <label for="fn">Type anything:</label>
+            <input id ="fn">
+        </p>
+        <input type="submit">
 
+        <p>
+            <img th:each="letter: ${letters}"
+                 th:src="@{|images/abc_blocks-images/block_${letter}.png|}"
+                 th:alt="'block ' + ${letter}"
+                 class="abc-block">
+        </p>
+
+    </form>
 </main>
 
 </body>
