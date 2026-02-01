@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <style>
+        body{background-color: lightcoral}
+    </style>
     <meta charset="UTF-8">
     <title>Assignment 1 / Carlos Tello Dominguez</title>
 </head>
 <body>
+
 <header>
     <h1>Assignment 1 / Carlos Tello Dominguez</h1>
 </header>
@@ -17,8 +21,9 @@
             <label for="userInput">Type more than 10 characters</label>
             <input id="userInput"
                    type="text"
+                   oninput="this.value = this.value.toUpperCase();"
                    th:name="userInput"
-                   th:value="display">
+                   th:value="${userInput}">
             <button type="submit">Display</button>
         </p>
 
@@ -30,10 +35,8 @@
                  class="abc-block">
         </p>
 
-
-
-
 </main>
+
 
 </body>
 </html>

@@ -3,7 +3,6 @@ package sheridan.carlos.assignment_1_carlos_tello_dominguez.controller;
 
 import sheridan.carlos.assignment_1_carlos_tello_dominguez.Blocks;
 import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -52,11 +51,18 @@ public class UserController {
         log.trace("processBlocks() is called");
         Blocks blocks = getBlocks(session);
         switch (todo) {
-            case "reverse" -> blocks.reverseBlocks();
-            case "sort" -> blocks.sortBlocks();
-            case "shuffle" -> blocks.shuffleBlocks();
             case "display" -> {
+                if(!blocks.isMoreThanTen(userInput))
+                {
+                    model.addAttribute("error", "Text must be at least 10 characters");
+                    model.addAttribute("letters", blocks.getLetters());
+                    return "input";
+                };
+
+                userInput = userInput.trim();
+                model.addAttribute("letters", blocks.userLettersInput(userInput));
                 model.addAttribute("userInput", userInput);
+                return "input";
             }
         }
         return "redirect:/input";
