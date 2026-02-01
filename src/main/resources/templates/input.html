@@ -10,21 +10,29 @@
 </header>
 <main>
     <h1>Enter a text of at least 10 characters.</h1>
-    <form>
-        <p>
-            <label for="fn">Type anything:</label>
-            <input id ="fn">
-        </p>
-        <input type="submit">
+    <form method="post" th:action="@{process}">
+        <input type="hidden" th:name="todo" th:value="display">
 
         <p>
-            <img th:each="letter: ${letters}"
+            <label for="userInput">Type more than 10 characters</label>
+            <input id="userInput"
+                   type="text"
+                   th:name="userInput"
+                   th:value="display">
+            <button type="submit">Display</button>
+        </p>
+
+    </form>
+        <p>
+    <img th:each="letter: ${letters}"
                  th:src="@{|images/abc_blocks-images/block_${letter}.png|}"
                  th:alt="'block ' + ${letter}"
                  class="abc-block">
         </p>
 
-    </form>
+
+
+
 </main>
 
 </body>

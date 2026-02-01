@@ -45,7 +45,9 @@ public class UserController {
     @PostMapping("/process")
     public String processBlocks(
             @RequestParam String todo,
-            HttpSession session
+            @RequestParam(required = false) String userInput,
+            HttpSession session,
+            Model model
     ) {
         log.trace("processBlocks() is called");
         Blocks blocks = getBlocks(session);
@@ -53,6 +55,9 @@ public class UserController {
             case "reverse" -> blocks.reverseBlocks();
             case "sort" -> blocks.sortBlocks();
             case "shuffle" -> blocks.shuffleBlocks();
+            case "display" -> {
+                model.addAttribute("userInput", userInput);
+            }
         }
         return "redirect:/input";
     }

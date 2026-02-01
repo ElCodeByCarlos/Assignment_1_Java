@@ -46,6 +46,12 @@ public class Blocks implements Serializable {
         }
     }
 
+    public synchronized String displayBlocks(String userInput)
+    {
+        System.out.println(userInput);
+        return "output";
+    }
+
     @Override
     public String toString() {
         return "Blocks{" +
