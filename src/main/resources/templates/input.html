@@ -29,14 +29,22 @@
 
     </form>
         <p>
-    <img th:each="letter: ${letters}"
+            <img th:if="${letters == null}"
+                 th:src="@{|images/abc_blocks-images/block_heart.png}"
+                 alt="heart"
+                 class="abc-block">
+
+            <img th:each="letter: ${letters}"
                  th:src="@{|images/abc_blocks-images/block_${letter}.png|}"
                  th:alt="'block ' + ${letter}"
                  class="abc-block">
         </p>
+    <p th:if="${error}" th:text="${error}" style="color: red; font-weight: bold;"></p>
 
 </main>
 
-
+<footer>
+    <h1>Carlos Tello Dominguez</h1>
+</footer>
 </body>
 </html>

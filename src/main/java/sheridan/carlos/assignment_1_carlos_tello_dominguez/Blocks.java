@@ -22,9 +22,14 @@ public class Blocks implements Serializable {
     }
 
 
-    public boolean isMoreThanTen(String userInput)
+    public boolean isValidInput(String userInput)
     {
-        return userInput != null && userInput.trim().length() >= 10;
+        if (userInput == null) {
+            return false;
+        }
+
+        int length = userInput.trim().length();
+        return length >= 1 && length <= 10;
     }
     public synchronized List<Character> userLettersInput(String userInput)
     {

@@ -2,6 +2,9 @@
 package sheridan.carlos.assignment_1_carlos_tello_dominguez.controller;
 
 import sheridan.carlos.assignment_1_carlos_tello_dominguez.Blocks;
+import sheridan.carlos.assignment_1_carlos_tello_dominguez.validation;
+
+
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -9,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @Slf4j
@@ -24,7 +28,7 @@ public class UserController {
             Model model) {
         log.trace("Display all images");
         Blocks blocks = getBlocks(session);
-        model.addAttribute("letters", blocks.getLetters());
+        //model.addAttribute("letters", blocks.getLetters());
         return "input";
     }
 
@@ -48,11 +52,18 @@ public class UserController {
             HttpSession session,
             Model model
     ) {
+        String error = validation.validate(userInput);
+
+        if (error != null) {
+            model.addAttribute("error", error);
+            return "input";
+        }
+
         log.trace("processBlocks() is called");
         Blocks blocks = getBlocks(session);
         switch (todo) {
             case "display" -> {
-                if(!blocks.isMoreThanTen(userInput))
+                if(!blocks.isValidInput(userInput))
                 {
                     model.addAttribute("error", "Text must be at least 10 characters");
                     model.addAttribute("letters", blocks.getLetters());
